@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mlflow:
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    command: ["postgres://mlflow:mlflow@postgres:5432/mlflow"]
+    depends_on:
+      - postgres
+    
+  postgres:
+    image: postgres:13.14
+    environment:
+      POSTGRES_USER: mlflow
+      POSTGRES_PASSWORD: mlflow
+      POSTGRES_DB: mlflow
+    
+    
